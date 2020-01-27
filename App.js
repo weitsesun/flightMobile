@@ -1,35 +1,35 @@
-import React from 'react';
-import { 
-  StyleSheet, 
-  Text, 
-  View, 
-  Image, 
-  ImageBackground, 
+import React, { useState } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ImageBackground,
   TouchableOpacity,
-  TouchableWithoutFeedback
- } from 'react-native';
+} from 'react-native';
 
 const backgroundURL = 'https://wallpaperaccess.com/full/797185.png'
 
 export default function App() {
+  
   return (
     <>
-        <ImageBackground 
-          source={{uri: backgroundURL}} 
-          style={styles.container}
+      <ImageBackground
+        source={{ uri: backgroundURL }}
+        style={styles.container}
+      >
+        <Text
+          style={styles.header}
         >
-          <Text 
-            style={styles.header}
-          >
-            Search Your Flight
+          Search Your Flight
           </Text>
-          <TouchableOpacity
-            onPress={() => alert('System maintaining')}
-            style={styles.welcomeButton}
-          >
-            <Text style={styles.welcomeButtonText}>Let's Go!</Text>
-          </TouchableOpacity>
-        </ImageBackground>
+        <TouchableOpacity
+          onPress={() => alert('System maintaining')}
+          style={styles.welcomeButton}
+        >
+          <Text style={styles.welcomeButtonText}>Let's Go!</Text>
+        </TouchableOpacity>
+      </ImageBackground>
 
     </>
   );
