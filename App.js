@@ -7,6 +7,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import { data } from './fakeData'
 
 const backgroundURL = 'https://wallpaperaccess.com/full/797185.png'
 
@@ -21,7 +22,7 @@ export default function App() {
         <Text
           style={styles.header}
         >
-          Search Your Flight
+          Data: {JSON.stringify(data)}
           </Text>
         <TouchableOpacity
           onPress={() => alert('System maintaining')}
