@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,28 +7,22 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import { data } from './fakeData'
-
-const backgroundURL = 'https://wallpaperaccess.com/full/797185.png'
+import TravelPlans from './components/TravelPlans'
+import { fakeData } from './fakeData'
 
 export default function App() {
-  
+  const [ data, setData ] = useState([])
+
+  useEffect( ()=> setData( fakeData ), [data])
+
   return (
     <>
-      <ImageBackground
-        source={{ uri: backgroundURL }}
-        style={styles.container}
-      >
-        <Text
-          style={styles.header}
-        >
-          Data: {JSON.stringify(data)}
-          </Text>
+      <ImageBackground style={styles.container}>
+        <TravelPlans data={data}/>
         <TouchableOpacity
           onPress={() => alert('System maintaining')}
-          style={styles.welcomeButton}
         >
-          <Text style={styles.welcomeButtonText}>Let's Go!</Text>
+          <Text>Current Task: Render Trips</Text>
         </TouchableOpacity>
       </ImageBackground>
 
@@ -41,23 +35,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
   },
-  header: {
-    color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    backgroundColor: 'transparent',
-  },
-  welcomeButton: {
-    backgroundColor: 'rgb(200, 200, 90)',
-    padding: 10,
-    borderRadius: 10,
-    marginTop: 15,
-  },
-  welcomeButtonText: {
-    fontSize: 15,
-    color: '#fff',
-    fontWeight: 'bold'
-  }
 });

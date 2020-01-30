@@ -1,4 +1,4 @@
-export const data = [
+export const fakeData = [
   {
     tripName: 'trip1',
     flights: [
@@ -21,5 +21,28 @@ export const data = [
         }
       }  
     ]
-  }
+  },
+  {
+    tripName: 'trip2',
+    flights: [
+      {
+        id: 2,
+        date: {
+          year: 2020,
+          month: 3,
+          day: 10,
+        },
+        from: 'TWN',
+        to: 'SFO',
+        kind: 'departure',
+        terminal: 'D',
+        Gate: 'A13',
+        flightNumber: 'BR28',
+        scheduled: {
+          hour: 13,
+          min: 30,
+        }
+      }  
+    ]
+  },
 ]
