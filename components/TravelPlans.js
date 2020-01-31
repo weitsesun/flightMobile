@@ -14,12 +14,12 @@ export default function TravelPlans({ data }) {
   return (
     <View style={{
       flexDirection: 'row',
-      flexWrap: 'wrap'
+      flexWrap: 'wrap',
       }}
     >
       {/* <Text>{JSON.stringify(Array.isArray(data))}</Text> */}
       {data && data.map(plan => {
-        return <SinglePlan tripName={plan.tripName}/>
+        return <SinglePlan key={data.id} tripName={plan.tripName}/>
       })}
     </View>
   )

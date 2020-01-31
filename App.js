@@ -17,6 +17,7 @@ export default function App() {
 
   return (
     <>
+      <View style={styles.header}></View>
       <ImageBackground style={styles.container}>
         <TravelPlans data={data}/>
         <TouchableOpacity
@@ -25,16 +26,22 @@ export default function App() {
           <Text>Current Task: Render Trips</Text>
         </TouchableOpacity>
       </ImageBackground>
-
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  header:{
+    height: 100,
+    width: '100%',
+    backgroundColor: 'rgb(10,150,140)'
+  },
   container: {
     flex: 1,
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'center',
-    backgroundColor: 'white',
+    backgroundColor: 'lightblue',
   },
 });

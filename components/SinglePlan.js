@@ -8,9 +8,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default function SinglePlan({ id, tripName }) {
+export default function SinglePlan({ tripName }) {
   return (
-      <View key={id} style={ styles.box }>
+      <View style={ styles.box }>
         <Text> {tripName}</Text>
       </View>
   )
@@ -24,5 +24,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 10,
     borderWidth: 1,
+    alignItems: 'flex-end',
+    flexDirection: 'row',
   }
 })
