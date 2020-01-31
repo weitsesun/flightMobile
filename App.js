@@ -20,11 +20,11 @@ export default function App() {
       <View style={styles.header}></View>
       <ImageBackground style={styles.container}>
         <TravelPlans data={data}/>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() => alert('System maintaining')}
         >
           <Text>Current Task: Render Trips</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </ImageBackground>
     </>
   );

@@ -8,26 +8,29 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import SinglePlan from './SinglePlan'
-import AddNewPlan from './AddNewPlan'
+import AddNewPlanComponent from './AddNewPlanComponent'
 
 export default function TravelPlans({ data }) {
 
   return (
     <View>
-      <View style={{
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        // backgroundColor: 'red',
-        width: '100%',
-        justifyContent: 'flex-start',
-      }}
+      <View style={styles.planViewGrid}
       >
-        {/* <Text>{JSON.stringify(Array.isArray(data))}</Text> */}
-        {data && data.map(plan => {
-          return <SinglePlan key={data.id} tripName={plan.tripName} />
+        {/* <Text></Text> */}
+        {data && data.map(travelPlan => {
+          return <SinglePlan key={travelPlan.tripName} tripName={travelPlan.tripName} />
         })}
-        <AddNewPlan />
+        <AddNewPlanComponent />
       </View>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  planViewGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: '100%',
+    justifyContent: 'flex-start',
+  },
+})

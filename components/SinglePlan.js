@@ -10,9 +10,12 @@ import {
 
 export default function SinglePlan({ tripName }) {
   return (
-      <View style={ styles.box }>
+      <TouchableOpacity 
+        style={ styles.box }
+        onPress={() => alert('switch to trip')}
+      >
         <Text> {tripName}</Text>
-      </View>
+      </TouchableOpacity>
   )
 }
 
@@ -26,5 +29,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     alignItems: 'flex-end',
     flexDirection: 'row',
+    // backgroundColor: 'red',
   }
 })

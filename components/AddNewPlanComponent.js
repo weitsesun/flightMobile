@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default function AddNewPlan() {
+export default function AddNewPlanComponent() {
   return (
-    <View style={styles.box}>
+    <TouchableOpacity style={styles.box}>
       <View style={styles.circle}>
         <Text style={styles.arrow}>+</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
