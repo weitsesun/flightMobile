@@ -10,15 +10,18 @@ import {
 import SinglePlan from './SinglePlan'
 import AddNewPlanComponent from './AddNewPlanComponent'
 
-export default function TravelPlans({ data }) {
-
+export default function TravelPlans({ data, navigation }) {
   return (
     <View>
       <View style={styles.planViewGrid}
       >
         {/* <Text></Text> */}
         {data && data.map(travelPlan => {
-          return <SinglePlan key={travelPlan.tripName} tripName={travelPlan.tripName} />
+          return <SinglePlan 
+                    key={travelPlan.tripName}
+                    travelPlan={travelPlan}
+                    navigation={navigation}
+                  />
         })}
         <AddNewPlanComponent />
       </View>

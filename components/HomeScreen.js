@@ -8,7 +8,7 @@ import {
 import { fakeData } from '../fakeData'
 import TravelPlans from './TravelPlans'
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
   const [data, setData] = useState([])
   useEffect(() => setData(fakeData), [data])
 
@@ -16,7 +16,7 @@ export default function HomeScreen() {
     <>
       {/* <View style={styles.header}></View> */}
       <ImageBackground style={styles.container}>
-        <TravelPlans data={data} />
+        <TravelPlans data={data} navigation={navigation} />
       </ImageBackground>
     </>
   );

@@ -5,12 +5,17 @@ import { createStackNavigator } from 'react-navigation-stack';
 import 'react-native-gesture-handler'
 
 import HomeScreen from './components/HomeScreen'
+import FlightsOverview from './components/FlightsOverview'
 
-const AppNavigator = createStackNavigator({
-  Home: {
-    screen: HomeScreen,
+const AppNavigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    Flights: FlightsOverview
   },
-});
+  {
+    initialRouteParams: 'Home',
+  }
+);
 
 const AppContainer = createAppContainer(AppNavigator);
 
