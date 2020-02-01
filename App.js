@@ -1,47 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  ImageBackground,
-  TouchableOpacity,
-} from 'react-native';
-import TravelPlans from './components/TravelPlans'
-import { fakeData } from './fakeData'
+import React from 'react';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-export default function App() {
-  const [ data, setData ] = useState([])
+import 'react-native-gesture-handler'
 
-  useEffect( ()=> setData( fakeData ), [data])
+import HomeScreen from './components/HomeScreen'
 
-  return (
-    <>
-      <View style={styles.header}></View>
-      <ImageBackground style={styles.container}>
-        <TravelPlans data={data}/>
-        {/* <TouchableOpacity
-          onPress={() => alert('System maintaining')}
-        >
-          <Text>Current Task: Render Trips</Text>
-        </TouchableOpacity> */}
-      </ImageBackground>
-    </>
-  );
-}
-
-const styles = StyleSheet.create({
-  header:{
-    height: 100,
-    width: '100%',
-    backgroundColor: 'rgb(10,150,140)'
-  },
-  container: {
-    flex: 1,
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    backgroundColor: 'lightblue',
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: HomeScreen,
   },
 });
+
+const AppContainer = createAppContainer(AppNavigator);
+
+export default function App() {
+  return <AppContainer />
+}
+
