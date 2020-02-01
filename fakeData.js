@@ -1,10 +1,22 @@
+const uuidv4 = require('uuid/v4')
+
 export const fakeData = [
   {
     tripName: 'trip1',
     flights: [
       {
-        id: 1,
+        id: uuidv4(),
         scheduled: new Date(2020, 1, 1, 23),
+        from: 'TWN',
+        to: 'SFO',
+        kind: 'departure',
+        terminal: 'D',
+        Gate: 'A13',
+        flightNumber: 'BR28',
+      },
+      {
+        id: uuidv4(),
+        scheduled: new Date(2020, 3, 16, 10),
         from: 'TWN',
         to: 'SFO',
         kind: 'departure',
@@ -18,7 +30,7 @@ export const fakeData = [
     tripName: 'trip2',
     flights: [
       {
-        id: 1,
+        id: uuidv4(),
         scheduled: new Date(2020, 3, 16, 5, 30),
         from: 'SFO',
         to: 'BOS',

@@ -10,7 +10,7 @@ import FlightsOverview from './components/FlightsOverview'
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Flights: FlightsOverview
+    FlightsOverview: FlightsOverview
   },
   {
     initialRouteParams: 'Home',

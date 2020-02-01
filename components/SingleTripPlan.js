@@ -5,11 +5,14 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default function SinglePlan({ travelPlan, navigation }) {
+export default function SingleTripPlan({ travelPlan, navigation }) {
   return (
       <TouchableOpacity 
         style={ styles.box }
-        onPress={() => navigation.navigate('Flights', { flights: travelPlan })}
+        onPress={() => navigation.navigate('FlightsOverview', 
+                                            { flights: travelPlan.flights,
+                                              tripName: travelPlan.tripName }
+                                          )}
       >
         <Text> {travelPlan.tripName}</Text>
       </TouchableOpacity>

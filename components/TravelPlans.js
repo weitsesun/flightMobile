@@ -7,7 +7,7 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import SinglePlan from './SinglePlan'
+import SingleTripPlan from './SingleTripPlan'
 import AddNewPlanComponent from './AddNewPlanComponent'
 
 export default function TravelPlans({ data, navigation }) {
@@ -17,7 +17,7 @@ export default function TravelPlans({ data, navigation }) {
       >
         {/* <Text></Text> */}
         {data && data.map(travelPlan => {
-          return <SinglePlan 
+          return <SingleTripPlan 
                     key={travelPlan.tripName}
                     travelPlan={travelPlan}
                     navigation={navigation}
