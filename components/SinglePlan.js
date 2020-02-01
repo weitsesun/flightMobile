@@ -9,7 +9,7 @@ export default function SinglePlan({ travelPlan, navigation }) {
   return (
       <TouchableOpacity 
         style={ styles.box }
-        onPress={() => navigation.navigate('Flights')}
+        onPress={() => navigation.navigate('Flights', { flights: travelPlan })}
       >
         <Text> {travelPlan.tripName}</Text>
       </TouchableOpacity>
