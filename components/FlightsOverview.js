@@ -18,7 +18,13 @@ export default function FlightsOverview({ navigation }) {
   return (
       <View style={styles.flightContainer}>
         <Text style={styles.subject}>Flights in {tripName}:</Text>
-        {flights.map(flight => <SingleFlight key={flight.id} flight={flight} />)}
+        {flights.map(flight => 
+          <SingleFlight 
+            key={flight.id} 
+            flight={flight}
+            navigation={navigation} 
+          />
+        )}
       </View>
   )
 }

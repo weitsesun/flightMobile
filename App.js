@@ -6,11 +6,13 @@ import 'react-native-gesture-handler'
 
 import HomeScreen from './components/HomeScreen'
 import FlightsOverview from './components/FlightsOverview'
+import SingleFlightDetail from './components/SingleFlightDetail'
 
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    FlightsOverview: FlightsOverview
+    FlightsOverview: FlightsOverview,
+    SingleFlightDetail: SingleFlightDetail,
   },
   {
     initialRouteParams: 'Home',

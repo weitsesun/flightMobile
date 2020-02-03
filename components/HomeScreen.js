@@ -14,7 +14,6 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <>
-      {/* <View style={styles.header}></View> */}
       <ImageBackground style={styles.container}>
         <TravelPlans data={data} navigation={navigation} />
       </ImageBackground>
