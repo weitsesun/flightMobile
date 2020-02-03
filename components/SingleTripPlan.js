@@ -2,19 +2,19 @@ import React from 'react'
 import {
   StyleSheet,
   Text,
-  View,
-  Image,
-  ImageBackground,
   TouchableOpacity,
 } from 'react-native';
 
-export default function SinglePlan({ tripName }) {
+export default function SingleTripPlan({ travelPlan, navigation }) {
   return (
       <TouchableOpacity 
         style={ styles.box }
-        onPress={() => alert('switch to trip')}
+        onPress={() => navigation.navigate('FlightsOverview', 
+                                            { flights: travelPlan.flights,
+                                              tripName: travelPlan.tripName }
+                                          )}
       >
-        <Text> {tripName}</Text>
+        <Text> {travelPlan.tripName}</Text>
       </TouchableOpacity>
   )
 }
