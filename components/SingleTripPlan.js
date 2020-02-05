@@ -6,6 +6,7 @@ import {
   TouchableHighlight,
   View,
   Animated,
+  Easing,
 } from 'react-native';
 
 export default function SingleTripPlan({
@@ -24,14 +25,37 @@ export default function SingleTripPlan({
     )
   }
 
+  let wiggleValue = new Animated.Value(0)
+  const handleWiggle = () => {
+    if(!deleteMode) return;
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(wiggleValue, { toValue: 1.0, duration: 150, easing: Easing.linear, useNativeDriver: true }),
+        Animated.timing(wiggleValue, { toValue: -1.0, duration: 300, easing: Easing.linear, useNativeDriver: true }),
+        Animated.timing(wiggleValue, { toValue: 0.0, duration: 150, easing: Easing.linear, useNativeDriver: true }),
+      ]).start()
+    )
+  }
+
   return (
     <TouchableOpacity
-      style={{ ...styles.box, borderWidth: `${deleteMode ? 3 : 1}` }}
+      style={styles.box}
       onPress={() => handleTripPlanClicked()}
-      onLongPress={() => setDeleteMode(true)}
+      onLongPress={() => {
+        setDeleteMode(true)
+        handleWiggle()
+      }}
     >
+        <Animated.View style={{...styles.animateBox, 
+          borderWidth: `${deleteMode ? 3 : 1}`,
+          transform: [{
+            rotate: wiggleValue.interpolate({
+              inputRange: [-1, 1],
+              outputRange: ['-0.1rad', '0.1rad'],
+            })
+          }]}}>
       {deleteMode && (
-        <TouchableOpacity 
+        <TouchableOpacity
           style={styles.deleteButton}
           onPress={() => alert('hi')}
         >
@@ -39,6 +63,7 @@ export default function SingleTripPlan({
         </TouchableOpacity>
       )}
       <Text> {travelPlan.tripName}</Text>
+      </Animated.View>
     </TouchableOpacity>
   )
 }
@@ -48,8 +73,6 @@ const styles = StyleSheet.create({
     width: 150,
     height: 150,
     margin: 17,
-    padding: 10,
-    borderRadius: 10,
     alignItems: 'flex-end',
     flexDirection: 'row',
   },
@@ -78,5 +101,13 @@ const styles = StyleSheet.create({
   },
   deleteButtonText: {
     fontSize: 25,
+  },
+  animateBox: {
+    width: '100%',
+    height: '100%',
+    padding: 15,
+    alignItems: 'flex-end',
+    flexDirection: 'row',
+    borderRadius: 10,
   }
 })
