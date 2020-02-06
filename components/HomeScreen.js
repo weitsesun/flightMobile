@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, createContext} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,16 +8,35 @@ import {
 import { fakeData } from '../fakeData'
 import TravelPlans from './TravelPlans'
 
+export const DeleteFuncContext = createContext(null)
+
 export default function HomeScreen({ navigation }) {
   const [data, setData] = useState([])
-  useEffect(() => setData(fakeData), [data])
+  useEffect(() => setData(fakeData), [])
+
+  /** 
+   * Function for delete trip or flight
+   * @param trip_name(string)
+   * @param flight_id(optional)
+   */
+  const handleObjectDeleteFunc = (trip_name, flight_id=null) => {
+    if(!flight_id) {
+      let newData = data.filter(trip => {
+        return trip.tripName !== trip_name
+      })
+      setData(newData)
+    } else {
+      alert('flight_id delete function is not built')
+    }
+    return
+  }
 
   return (
-    <>
+    <DeleteFuncContext.Provider value={{handleObjectDeleteFunc}}>
       <ImageBackground style={styles.container}>
-        <TravelPlans data={data} navigation={navigation} />
+        <TravelPlans navigation={navigation} data={data} />
       </ImageBackground>
-    </>
+    </DeleteFuncContext.Provider>
   );
 }
 
