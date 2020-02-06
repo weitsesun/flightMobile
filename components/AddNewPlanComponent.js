@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   StyleSheet,
   Text,
@@ -6,9 +6,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-export default function AddNewPlanComponent() {
+export default function AddNewPlanComponent({ deleteMode }) {
+  
   return (
-    <TouchableOpacity style={styles.box}>
+    <TouchableOpacity style={{...styles.box, opacity: `${deleteMode ? 0.2 : 1}`}}>
       <View style={styles.circle}>
         <Text style={styles.arrow}>+</Text>
       </View>

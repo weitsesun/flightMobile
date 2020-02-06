@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import {
   StyleSheet,
   Text,
@@ -9,13 +9,15 @@ import {
   Easing,
 } from 'react-native';
 
+import { DeleteFuncContext } from './HomeScreen'
+
 export default function SingleTripPlan({
   travelPlan,
   navigation,
   deleteMode,
   setDeleteMode,
 }) {
-
+  const { handleObjectDeleteFunc } = useContext(DeleteFuncContext)
   const handleTripPlanClicked = () => {
     if(deleteMode) return;
     return navigation.navigate('FlightsOverview',
@@ -41,7 +43,7 @@ export default function SingleTripPlan({
   useEffect(()=>{
     if(!deleteMode) return
     handleWiggle()
-  },[deleteMode])
+  })
 
   return (
     <TouchableOpacity
@@ -56,13 +58,13 @@ export default function SingleTripPlan({
           transform: [{
             rotate: wiggleValue.interpolate({
               inputRange: [-1, 1],
-              outputRange: ['-2deg', '2deg'],
+              outputRange: ['-1deg', '1deg'],
             })
           }]}}>
       {deleteMode && (
         <TouchableOpacity
           style={styles.deleteButton}
-          onPress={() => alert('hi')}
+          onPress={() => handleObjectDeleteFunc(travelPlan.tripName)}
         >
           <Text style={styles.deleteButtonText}>×</Text>
         </TouchableOpacity>
@@ -106,6 +108,7 @@ const styles = StyleSheet.create({
   },
   deleteButtonText: {
     fontSize: 25,
+    color: 'white',
   },
   animateBox: {
     width: '100%',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect,  } from 'react'
 import {
   StyleSheet,
   Text,
@@ -6,9 +6,11 @@ import {
   Image,
   ImageBackground,
   TouchableOpacity,
+  Animated,
 } from 'react-native';
 import SingleTripPlan from './SingleTripPlan'
 import AddNewPlanComponent from './AddNewPlanComponent'
+import { DataContext } from './HomeScreen'
 
 export default function TravelPlans({ data, navigation }) {
   const [deleteMode, setDeleteMode] = useState(false)
@@ -32,7 +34,9 @@ export default function TravelPlans({ data, navigation }) {
                     deleteMode={deleteMode}
                   />
         })}
-        <AddNewPlanComponent />
+
+        {/* if deleteMode is ON, hide add new plan button */}
+      <AddNewPlanComponent deleteMode={deleteMode}/>
       </View>
       </TouchableOpacity>
     </View>
