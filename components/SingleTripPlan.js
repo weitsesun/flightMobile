@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   StyleSheet,
   Text,
@@ -17,6 +17,7 @@ export default function SingleTripPlan({
 }) {
 
   const handleTripPlanClicked = () => {
+    if(deleteMode) return;
     return navigation.navigate('FlightsOverview',
       {
         flights: travelPlan.flights,
@@ -26,16 +27,21 @@ export default function SingleTripPlan({
   }
 
   let wiggleValue = new Animated.Value(0)
+  
   const handleWiggle = () => {
-    if(!deleteMode) return;
-    Animated.loop(
-      Animated.sequence([
-        Animated.timing(wiggleValue, { toValue: 1.0, duration: 150, easing: Easing.linear, useNativeDriver: true }),
-        Animated.timing(wiggleValue, { toValue: -1.0, duration: 300, easing: Easing.linear, useNativeDriver: true }),
-        Animated.timing(wiggleValue, { toValue: 0.0, duration: 150, easing: Easing.linear, useNativeDriver: true }),
-      ]).start()
-    )
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(wiggleValue, { toValue: 1.0, duration: 40, easing: Easing.linear, useNativeDriver: true }),
+          Animated.timing(wiggleValue, { toValue: -1.0, duration: 80, easing: Easing.linear, useNativeDriver: true }),
+          Animated.timing(wiggleValue, { toValue: 0.0, duration: 40, easing: Easing.linear, useNativeDriver: true }),
+        ]).start(() => handleWiggle())
+      )
   }
+
+  useEffect(()=>{
+    if(!deleteMode) return
+    handleWiggle()
+  },[deleteMode])
 
   return (
     <TouchableOpacity
@@ -43,7 +49,6 @@ export default function SingleTripPlan({
       onPress={() => handleTripPlanClicked()}
       onLongPress={() => {
         setDeleteMode(true)
-        handleWiggle()
       }}
     >
         <Animated.View style={{...styles.animateBox, 
@@ -51,7 +56,7 @@ export default function SingleTripPlan({
           transform: [{
             rotate: wiggleValue.interpolate({
               inputRange: [-1, 1],
-              outputRange: ['-0.1rad', '0.1rad'],
+              outputRange: ['-2deg', '2deg'],
             })
           }]}}>
       {deleteMode && (
