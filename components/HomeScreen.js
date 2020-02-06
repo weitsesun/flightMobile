@@ -16,7 +16,8 @@ export default function HomeScreen({ navigation }) {
 
   /** 
    * Function for delete trip or flight
-   * @input trip_name(string), flight_id(uuidv4, optional)
+   * @param trip_name(string)
+   * @param flight_id(optional)
    */
   const handleObjectDeleteFunc = (trip_name, flight_id=null) => {
     if(!flight_id) {

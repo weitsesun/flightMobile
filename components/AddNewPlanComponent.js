@@ -9,7 +9,10 @@ import {
 export default function AddNewPlanComponent({ deleteMode }) {
   
   return (
-    <TouchableOpacity style={{...styles.box, opacity: `${deleteMode ? 0.2 : 1}`}}>
+    <TouchableOpacity 
+      style={{...styles.box, opacity: `${deleteMode ? 0.2 : 1}`}}
+      onPress={ () => alert('TODO: add new travel plan')}
+    >
       <View style={styles.circle}>
         <Text style={styles.arrow}>+</Text>
       </View>

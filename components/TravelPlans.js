@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import SingleTripPlan from './SingleTripPlan'
 import AddNewPlanComponent from './AddNewPlanComponent'
-import { DataContext } from './HomeScreen'
 
 export default function TravelPlans({ data, navigation }) {
   const [deleteMode, setDeleteMode] = useState(false)
