@@ -10,15 +10,15 @@ import {
 
 import { FuncContext } from './HomeScreen'
 
-export default function AddNewPlanComponent({ deleteMode }) {
-  const { handleObjectAddFunc } = useContext(FuncContext)
+export default function AddNewPlanComponent() {
+  const { handleObjectAddFunc, MAX_TRIP_NAME_LENGTH } = useContext(FuncContext)
 
   return (
     <TouchableOpacity 
       style={styles.box }
       onPress={ () => Alert.prompt(
         'Create a new travel plan',
-        'Maximum 15 characters',
+        `Maximum ${MAX_TRIP_NAME_LENGTH} characters`,
         (new_trip_name) => handleObjectAddFunc(new_trip_name),
       )}
     >

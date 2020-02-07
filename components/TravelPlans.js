@@ -30,7 +30,7 @@ export default function TravelPlans({ data, navigation }) {
         })}
 
         {/* if deleteMode is ON, hide add new plan button */}
-      <AddNewPlanComponent deleteMode={deleteMode}/>
+      <AddNewPlanComponent />
       </View>
       </TouchableOpacity>
   )

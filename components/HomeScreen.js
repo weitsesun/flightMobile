@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, createContext} from 'react';
+import React, { useState, useEffect, useContext, createContext } from 'react';
 import {
   StyleSheet,
   View,
@@ -8,19 +8,23 @@ import {
 import { fakeData } from '../fakeData'
 import TravelPlans from './TravelPlans'
 
+
+
 export const FuncContext = createContext(null)
 
 export default function HomeScreen({ navigation }) {
   const [data, setData] = useState([])
-  useEffect(() => setData(fakeData), [])
+  const MAX_TRIP_NAME_LENGTH = 12
 
+  useEffect(() => setData(fakeData), [])
   /** 
    * Function for delete trip or flight
    * @param trip_name(string)
    * @param flight_id(optional)
    */
-  const handleObjectDeleteFunc = (trip_name, flight_id=null) => {
-    if(!flight_id) {
+  const handleObjectDeleteFunc = (trip_name, flight_id = null) => {
+    
+    if (!flight_id) {
       let newData = data.filter(trip => {
         return trip.tripName !== trip_name
       })
@@ -31,21 +35,21 @@ export default function HomeScreen({ navigation }) {
     return
   }
 
-  const handleObjectAddFunc = (new_trip_name, new_flight=null) => {
-    if(!new_flight) {
+  const handleObjectAddFunc = (new_trip_name, new_flight = null) => {
+    if (!new_flight) {
       // handle empty name
-      if(!new_trip_name) {
+      if (!new_trip_name) {
         alert('Name cannot be empty')
         return
       }
       // handle oversized name
-      if (new_trip_name.length > 15) {
-        alert('Invalid: Over 15 characters')
+      if (new_trip_name.length > MAX_TRIP_NAME_LENGTH) {
+        alert(`Invalid: Over ${MAX_TRIP_NAME_LENGTH} characters`)
         return
       }
       // handle duplicated name
-      for(let trip of data) {
-        if(trip.tripName === new_trip_name) {
+      for (let trip of data) {
+        if (trip.tripName === new_trip_name) {
           alert('This name is in use.')
           return
         }
@@ -66,7 +70,11 @@ export default function HomeScreen({ navigation }) {
   }
 
   return (
-    <FuncContext.Provider value={{handleObjectDeleteFunc, handleObjectAddFunc}}>
+    <FuncContext.Provider value={{
+      handleObjectDeleteFunc,
+      handleObjectAddFunc,
+      MAX_TRIP_NAME_LENGTH,
+    }}>
       <ImageBackground style={styles.container}>
         <TravelPlans navigation={navigation} data={data} />
       </ImageBackground>
@@ -86,6 +94,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    backgroundColor: 'lightblue',
   },
 });

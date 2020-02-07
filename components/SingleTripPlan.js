@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import { FuncContext } from './HomeScreen'
+import { AuthSession } from 'expo';
 
 export default function SingleTripPlan({
   travelPlan,
@@ -18,7 +19,7 @@ export default function SingleTripPlan({
 }) {
   const { handleObjectDeleteFunc } = useContext(FuncContext)
   const handleTripPlanClicked = () => {
-    if(deleteMode) return;
+    if (deleteMode) return;
     return navigation.navigate('FlightsOverview',
       {
         flights: travelPlan.flights,
@@ -28,19 +29,19 @@ export default function SingleTripPlan({
   }
 
   let wiggleValue = new Animated.Value(0)
-  
+
   const handleWiggle = () => {
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(wiggleValue, { toValue: 1.0, duration: 40, easing: Easing.linear, useNativeDriver: true }),
-          Animated.timing(wiggleValue, { toValue: -1.0, duration: 80, easing: Easing.linear, useNativeDriver: true }),
-          Animated.timing(wiggleValue, { toValue: 0.0, duration: 40, easing: Easing.linear, useNativeDriver: true }),
-        ]).start(() => handleWiggle())
-      )
+    Animated.loop(
+      Animated.sequence([
+        Animated.timing(wiggleValue, { toValue: 1.0, duration: 40, easing: Easing.linear, useNativeDriver: true }),
+        Animated.timing(wiggleValue, { toValue: -1.0, duration: 80, easing: Easing.linear, useNativeDriver: true }),
+        Animated.timing(wiggleValue, { toValue: 0.0, duration: 40, easing: Easing.linear, useNativeDriver: true }),
+      ]).start(() => handleWiggle())
+    )
   }
 
-  useEffect(()=>{
-    if(!deleteMode) return
+  useEffect(() => {
+    if (!deleteMode) return
     handleWiggle()
   })
 
@@ -52,23 +53,25 @@ export default function SingleTripPlan({
         setDeleteMode(true)
       }}
     >
-        <Animated.View style={{...styles.animateBox, 
-          borderWidth: `${deleteMode ? 3 : 1}`,
-          transform: [{
-            rotate: wiggleValue.interpolate({
-              inputRange: [-1, 1],
-              outputRange: ['-1deg', '1deg'],
-            })
-          }]}}>
-      {deleteMode && (
-        <TouchableOpacity
-          style={styles.deleteButton}
-          onPress={() => handleObjectDeleteFunc(travelPlan.tripName)}
-        >
-          <Text style={styles.deleteButtonText}>×</Text>
-        </TouchableOpacity>
-      )}
-      <Text> {travelPlan.tripName}</Text>
+      <Animated.View style={{
+        ...styles.animateBox,
+        borderWidth: `${deleteMode ? 3 : 1}`,
+        transform: [{
+          rotate: wiggleValue.interpolate({
+            inputRange: [-1, 1],
+            outputRange: ['-1deg', '1deg'],
+          })
+        }]
+      }}>
+        {deleteMode && (
+          <TouchableOpacity
+            style={styles.deleteButton}
+            onPress={() => handleObjectDeleteFunc(travelPlan.tripName)}
+          >
+            <Text style={styles.deleteButtonText}>×</Text>
+          </TouchableOpacity>
+        )}
+        <Text style={styles.tripNameText}> {travelPlan.tripName}</Text>
       </Animated.View>
     </TouchableOpacity>
   )
@@ -78,14 +81,19 @@ const { width } = Dimensions.get('window')
 const halfWidth = width / 2
 const boxWidth = halfWidth * 0.85
 const boxMargin = halfWidth * 0.075
+const boxPadding = halfWidth * 0.03
 
 const styles = StyleSheet.create({
   box: {
     width: boxWidth,
     height: boxWidth,
     margin: boxMargin,
-    alignItems: 'flex-end',
     flexDirection: 'row',
+  },
+  tripNameText: {
+    fontSize: 40,
+    fontWeight: '300',
+    flexWrap: 'wrap',
   },
   deleteBox: {
     width: boxWidth,
@@ -117,9 +125,10 @@ const styles = StyleSheet.create({
   animateBox: {
     width: '100%',
     height: '100%',
-    padding: 15,
-    alignItems: 'flex-end',
     flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-start',
+    paddingVertical: boxPadding,
     borderRadius: 10,
   }
 })
