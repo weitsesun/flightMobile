@@ -53,7 +53,7 @@ export default function HomeScreen({ navigation }) {
       // add new trip name to the data
       let newTrip = {
         tripName: new_trip_name,
-        flight: []
+        flights: []
       }
       setData(prevData => [
         ...prevData,
