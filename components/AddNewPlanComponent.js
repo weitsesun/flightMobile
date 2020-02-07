@@ -1,17 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useContext } from 'react'
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
+  Alert,
+  Dimensions
 } from 'react-native';
 
+import { FuncContext } from './HomeScreen'
+
 export default function AddNewPlanComponent({ deleteMode }) {
-  
+  const { handleObjectAddFunc } = useContext(FuncContext)
+
   return (
     <TouchableOpacity 
-      style={{...styles.box, opacity: `${deleteMode ? 0.2 : 1}`}}
-      onPress={ () => alert('TODO: add new travel plan')}
+      style={styles.box }
+      onPress={ () => Alert.prompt(
+        'Create a new travel plan',
+        'Maximum 15 characters',
+        (new_trip_name) => handleObjectAddFunc(new_trip_name),
+      )}
     >
       <View style={styles.circle}>
         <Text style={styles.arrow}>+</Text>
@@ -20,17 +29,22 @@ export default function AddNewPlanComponent({ deleteMode }) {
   )
 }
 
+const { width } = Dimensions.get('window')
+const halfWidth = width / 2
+const boxWidth = halfWidth * 0.85
+const boxMargin = halfWidth * 0.075
+
 const styles = StyleSheet.create({
   box: {
-    width: 150,
-    height: 150,
-    margin: 17,
+    width: boxWidth,
+    height: boxWidth,
+    margin: boxMargin,
     padding: 10,
     borderRadius: 10,
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection: 'row',
+    opacity: 0.7,
   },
   circle: {
     borderWidth: 1,
@@ -46,5 +60,6 @@ const styles = StyleSheet.create({
   arrow: {
     fontSize: 50,
     fontWeight: '100',
+    opacity: 0.7,
   }
 })

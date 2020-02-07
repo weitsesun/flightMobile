@@ -8,7 +8,7 @@ import {
 import { fakeData } from '../fakeData'
 import TravelPlans from './TravelPlans'
 
-export const DeleteFuncContext = createContext(null)
+export const FuncContext = createContext(null)
 
 export default function HomeScreen({ navigation }) {
   const [data, setData] = useState([])
@@ -31,12 +31,46 @@ export default function HomeScreen({ navigation }) {
     return
   }
 
+  const handleObjectAddFunc = (new_trip_name, new_flight=null) => {
+    if(!new_flight) {
+      // handle empty name
+      if(!new_trip_name) {
+        alert('Name cannot be empty')
+        return
+      }
+      // handle oversized name
+      if (new_trip_name.length > 15) {
+        alert('Invalid: Over 15 characters')
+        return
+      }
+      // handle duplicated name
+      for(let trip of data) {
+        if(trip.tripName === new_trip_name) {
+          alert('This name is in use.')
+          return
+        }
+      }
+      // add new trip name to the data
+      let newTrip = {
+        tripName: new_trip_name,
+        flight: []
+      }
+      setData(prevData => [
+        ...prevData,
+        newTrip,
+      ])
+    } else {
+      alert('TODO: add new flight')
+    }
+    return
+  }
+
   return (
-    <DeleteFuncContext.Provider value={{handleObjectDeleteFunc}}>
+    <FuncContext.Provider value={{handleObjectDeleteFunc, handleObjectAddFunc}}>
       <ImageBackground style={styles.container}>
         <TravelPlans navigation={navigation} data={data} />
       </ImageBackground>
-    </DeleteFuncContext.Provider>
+    </FuncContext.Provider>
   );
 }
 

@@ -3,13 +3,12 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  TouchableHighlight,
-  View,
   Animated,
   Easing,
+  Dimensions,
 } from 'react-native';
 
-import { DeleteFuncContext } from './HomeScreen'
+import { FuncContext } from './HomeScreen'
 
 export default function SingleTripPlan({
   travelPlan,
@@ -17,7 +16,7 @@ export default function SingleTripPlan({
   deleteMode,
   setDeleteMode,
 }) {
-  const { handleObjectDeleteFunc } = useContext(DeleteFuncContext)
+  const { handleObjectDeleteFunc } = useContext(FuncContext)
   const handleTripPlanClicked = () => {
     if(deleteMode) return;
     return navigation.navigate('FlightsOverview',
@@ -75,18 +74,23 @@ export default function SingleTripPlan({
   )
 }
 
+const { width } = Dimensions.get('window')
+const halfWidth = width / 2
+const boxWidth = halfWidth * 0.85
+const boxMargin = halfWidth * 0.075
+
 const styles = StyleSheet.create({
   box: {
-    width: 150,
-    height: 150,
-    margin: 17,
+    width: boxWidth,
+    height: boxWidth,
+    margin: boxMargin,
     alignItems: 'flex-end',
     flexDirection: 'row',
   },
   deleteBox: {
-    width: 150,
-    height: 150,
-    margin: 17,
+    width: boxWidth,
+    height: boxWidth,
+    margin: boxMargin,
     padding: 10,
     borderRadius: 10,
     borderWidth: 3,
