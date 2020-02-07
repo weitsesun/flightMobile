@@ -10,17 +10,24 @@ import {
 
 import { FuncContext } from './HomeScreen'
 
-export default function AddNewPlanComponent() {
+export default function AddNewPlanComponent({ deleteMode, setDeleteMode }) {
   const { handleObjectAddFunc, MAX_TRIP_NAME_LENGTH } = useContext(FuncContext)
 
   return (
-    <TouchableOpacity 
-      style={styles.box }
-      onPress={ () => Alert.prompt(
-        'Create a new travel plan',
-        `Maximum ${MAX_TRIP_NAME_LENGTH} characters`,
-        (new_trip_name) => handleObjectAddFunc(new_trip_name),
-      )}
+    <TouchableOpacity
+      style={styles.box}
+      onPress={() => {
+        if(deleteMode) {
+          setDeleteMode(false)
+          return
+        }
+        Alert.prompt(
+          'Create A New Travel Plan',
+          `Maximum ${MAX_TRIP_NAME_LENGTH} characters`,
+          (new_trip_name) => handleObjectAddFunc(new_trip_name),
+        )
+      }
+      }
     >
       <View style={styles.circle}>
         <Text style={styles.arrow}>+</Text>

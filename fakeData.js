@@ -2,7 +2,7 @@ const uuidv4 = require('uuid/v4')
 
 export const fakeData = [
   {
-    tripName: 'trip1',
+    tripName: 'Example1',
     flights: [
       {
         id: uuidv4(),
@@ -27,7 +27,7 @@ export const fakeData = [
     ]
   },
   {
-    tripName: 'trip2',
+    tripName: 'Example2',
     flights: [
       {
         id: uuidv4(),

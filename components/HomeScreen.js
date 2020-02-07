@@ -8,8 +8,6 @@ import {
 import { fakeData } from '../fakeData'
 import TravelPlans from './TravelPlans'
 
-
-
 export const FuncContext = createContext(null)
 
 export default function HomeScreen({ navigation }) {
